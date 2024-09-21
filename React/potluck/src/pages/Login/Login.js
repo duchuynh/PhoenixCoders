@@ -13,15 +13,25 @@ const Login = () => {
     console.log('Form is being submitted');
     try {
       const response = await api.post('/api/login', { firstName, lastName });
-      console.log('Server response:', response);
-      setMessage(response.data.message);
-
+      
       if (response.status === 200) {
-        console.log("Redirecting to onboarding...");
-        localStorage.setItem('user_id', response.data.user_id);
-        navigate('/onboarding'); // Redirect to onboarding page
+        const userId = response.data.user_id;
+        console.log('Server response:', response);
+        console.log('User ID:', userId);
+  
+        // Check if userId is valid before storing
+        if (userId) {
+          localStorage.setItem('user_id', userId);
+          console.log("Redirecting to onboarding...");
+          navigate('/onboarding'); // Redirect to onboarding page
+        } else {
+          console.error('User ID is missing from the response');
+          setMessage('Failed to retrieve User ID');
+        }
+      } else {
+        setMessage(response.data.message || 'Failed to login');
       }
-
+  
     } catch (error) {
       console.error('Error during login:', error);
       if (error.response && error.response.data) {

@@ -47,7 +47,13 @@ function Onboarding() {
     } else if (step === 3) {
       // Final step - submit data
       try {
+        const userId = localStorage.getItem('user_id');
+        if (!userId) {
+          throw new Error('User ID is not available');
+        }
+
         const response = await api.post('/api/onboarding', {
+          user_id: userId,
           cuisines: selectedCuisines.join(','),
           restrictions: selectedRestrictions.join(','),
           skill_level: skillLevel,
