@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import meals
+from routers import meals  # Assuming you are using relative import from the same directory level
 
 app = FastAPI()
 

@@ -44,7 +44,3 @@ def get_meal_details(meal_id: int) -> Dict:
         print(f"Error reading CSV file: {str(e)}")
     return {}
 
-# Example CSV File (`data/meals.csv`):
-id,name,cuisine,servings,ingredients,instructions
-1,Spaghetti Carbonara,Italian,4,"Spaghetti, Eggs, Pancetta, Parmesan, Pepper","Boil water and cook spaghetti. Fry pancetta. Mix eggs and cheese. Combine all."
-2,Chicken Curry,Indian,4,"Chicken, Curry powder, Onions, Tomatoes, Coconut milk","Cook chicken. Sauté onions and spices. Add tomatoes and coconut milk. Simmer."
