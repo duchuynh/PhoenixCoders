@@ -63,42 +63,50 @@ function Onboarding() {
   return (
     <div className="onboarding-container">
       <h2>Onboarding</h2>
+      
+      {/* Step 1: Select Cuisines */}
       {step === 1 && (
         <div className="onboarding-step">
           <h3>Select Your Cuisine Preferences</h3>
           <div className="checkbox-group">
             {cuisines.map((cuisine) => (
-              <label key={cuisine} className="checkbox-label">
+              <label key={cuisine} className="option-button">
+                <span>{cuisine}</span>
                 <input
                   type="checkbox"
                   checked={selectedCuisines.includes(cuisine)}
                   onChange={() => handleCuisineChange(cuisine)}
                 />
-                {cuisine}
+                <span className="checkbox-custom"></span>
               </label>
             ))}
           </div>
           <button className="onboarding-button" onClick={handleNext}>Next</button>
         </div>
       )}
+
+      {/* Step 2: Select Dietary Restrictions */}
       {step === 2 && (
         <div className="onboarding-step">
           <h3>Select Your Dietary Restrictions</h3>
           <div className="checkbox-group">
             {restrictions.map((restriction) => (
-              <label key={restriction} className="checkbox-label">
+              <label key={restriction} className="option-button">
+                <span>{restriction}</span>
                 <input
                   type="checkbox"
                   checked={selectedRestrictions.includes(restriction)}
                   onChange={() => handleRestrictionChange(restriction)}
                 />
-                {restriction}
+                <span className="checkbox-custom"></span>
               </label>
             ))}
           </div>
           <button className="onboarding-button" onClick={handleNext}>Next</button>
         </div>
       )}
+
+      {/* Step 3: Rate Cooking Skill */}
       {step === 3 && (
         <div className="onboarding-step">
           <h3>Rate Your Cooking Skill Level</h3>
