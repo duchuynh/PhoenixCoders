@@ -5,6 +5,10 @@ node_modules/
 # Also ignore node_modules in subdirectories
 **/node_modules/
 
+# Python bytecode/cache files
+__pycache__/
+*.py[cod]
+
 # Dependency directories
 .pnp/
 .pnp.js
