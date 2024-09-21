@@ -1,47 +1,72 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import api from '../../api';
 
-function LoginPage() {
+const Login = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    // Handle login logic here
-    navigate('/home'); // Redirect to home page after login (adjust route as needed)
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log('Form is being submitted');
+    try {
+      const response = await api.post('/api/login', { firstName, lastName });
+      console.log('Server response:', response);
+      setMessage(response.data.message);
 
-  const handleRegister = () => {
-    navigate('/register'); // Redirect to registration page
+      if (response.status === 200) {
+        console.log("Redirecting to onboarding...");
+        localStorage.setItem('user_id', response.data.user_id);
+        navigate('/onboarding'); // Redirect to onboarding page
+      }
+
+    } catch (error) {
+      console.error('Error during login:', error);
+      if (error.response && error.response.data) {
+        setMessage(error.response.data.message);
+      } else if (error.message) {
+        setMessage(error.message);
+      } else {
+        setMessage('An unexpected error occurred');
+      }
+    }
   };
 
   return (
-    <div className="container d-flex justify-content-center align-items-center vh-100">
-      <div className="card p-4" style={{ width: '300px' }}>
-        <h3 className="text-center mb-4">Login</h3>
-        <form>
-          <div className="mb-3">
-            <label htmlFor="username" className="form-label">
-              Username
-            </label>
-            <input type="text" className="form-control" id="username" />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="password" className="form-label">
-              Password
-            </label>
-            <input type="password" className="form-control" id="password" />
-          </div>
-          <button type="button" className="btn btn-primary w-100" onClick={handleLogin}>
+    <div className="registerUser">
+      <h3>Login</h3>
+      <form className="registerUserForm" onSubmit={handleSubmit}>
+        <div className="inputGroup">
+          <label htmlFor="firstName">First Name:</label>
+          <input 
+            type="text"
+            id="firstName"
+            autoComplete='off'
+            placeholder="Enter your First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+          <label htmlFor="lastName">Last Name:</label>
+          <input 
+            type="text"
+            id="lastName"
+            autoComplete='off'
+            placeholder="Enter your Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+          <button type="submit" className="btn btn-success">
             Login
           </button>
-        </form>
-        <div className="mt-3 text-center">
-          <button type="button" className="btn btn-link" onClick={handleRegister}>
-            Create a new account
-          </button>
+          {message && <p className="mt-3 text-center">{message}</p>}
         </div>
-      </div>
+      </form>
     </div>
   );
-}
+};
 
-export default LoginPage;
+export default Login;
