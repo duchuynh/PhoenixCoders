@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('background.jpg'); /* Change this to your image path */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+  }
+  
+  .registerUser {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8); /* Slight transparency to blend with the background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .registerUser h3 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .registerUserForm {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .inputGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+  }
+  
+  .inputGroup label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .inputGroup input {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+  }
+  
+  .inputGroup input:focus {
+    border-color: #6c757d;
+    outline: none;
+  }
+  
+  .btn-success {
+    padding: 15px 50px; /* Add more padding for a larger button */
+    background-color: #f9c68c; /* The peach color from the image */
+    color: white; /* White text */
+    font-size: 18px; /* Larger text size */
+    border: none;
+    border-radius: 40px; /* Fully rounded corners */
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Add some space above the button */
+  }
+  
+  .btn-success:hover {
+    background-color: #f39f5f; /* Slightly darker shade on hover */
+  }
+  
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .mt-3 {
+    margin-top: 1rem;
+  }
+  
