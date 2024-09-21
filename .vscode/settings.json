@@ -1,0 +1,6 @@
+{
+    "python.analysis.extraPaths": [
+        "./FastAPI/test_",
+        "./FastAPI/test_"
+    ]
+}
