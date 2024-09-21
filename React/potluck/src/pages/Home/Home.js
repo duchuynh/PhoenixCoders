@@ -1,31 +1,116 @@
-// src/pages/HomePage.js
-import React, { useState } from 'react';
-import MealForm from '../MealForm/MealForm';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import api from '../../api'; // Your axios setup
 
 function Home() {
-  const [meals, setMeals] = useState([]);
+  const [userData, setUserData] = useState(null);
+  const [eventName, setEventName] = useState('');
+  const [eventDate, setEventDate] = useState('');
+  const [eventTime, setEventTime] = useState('');
+  const [eventLocation, setEventLocation] = useState('');
+  const [invitees, setInvitees] = useState('');
+  const navigate = useNavigate();
 
-  const generateMeals = async (people) => {
+  useEffect(() => {
+    // Fetch user data after onboarding
+    const fetchUserData = async () => {
+      try {
+        const userId = localStorage.getItem('user_id'); // Assuming userId is stored in local storage
+        const response = await api.get(`/api/user/${userId}`);
+        setUserData(response.data);
+      } catch (error) {
+        console.error('Failed to fetch user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleCreateEvent = async (e) => {
+    e.preventDefault();
+    const userId = localStorage.getItem('user_id'); // Ensure this is available
     try {
-      const response = await fetch(`http://127.0.0.1:8000/meals/?number_of_people=${people}`);
-      const data = await response.json();
-      setMeals(data.meals);
+      const response = await api.post('/api/create-event', {
+        user_id: userId,
+        name: eventName,
+        date: eventDate,
+        time: eventTime,
+        location: eventLocation,
+        invitees: invitees.split(','), // Split by comma to create an array of invitees
+      });
+      console.log('Event created:', response.data);
+      // Redirect or update the UI after event creation
+      navigate('/event-success'); // Or any other route after successful event creation
     } catch (error) {
-      console.error('Error fetching meals:', error);
+      console.error('Failed to create event:', error);
     }
   };
 
+  if (!userData) {
+    return <div>Loading...</div>; // Loading state while data is being fetched
+  }
+
   return (
-    <div className="Home">
-      <h1>Meal Planner</h1>
-      <MealForm onGenerateMeals={generateMeals} />
-      <ul style={{ listStyleType: 'none', padding: '0' }}>
-        {meals.map((meal, index) => (
-          <li key={index} style={{ margin: '10px 0', padding: '10px', border: '1px solid #ccc', borderRadius: '4px' }}>
-            {meal}
-          </li>
-        ))}
-      </ul>
+    <div className="home-container">
+      <h2>Welcome, {userData.first_name}!</h2>
+      <div className="preferences">
+        <h3>Your Preferences:</h3>
+        <p><strong>Preferred Cuisines:</strong> {userData.cuisines.join(', ')}</p>
+        <p><strong>Dietary Restrictions:</strong> {userData.restrictions.join(', ')}</p>
+        <p><strong>Cooking Skill Level:</strong> {userData.skill_level}</p>
+      </div>
+
+      <div className="create-event-form">
+        <h3>Create a Potluck Event</h3>
+        <form onSubmit={handleCreateEvent}>
+          <div>
+            <label>Event Name:</label>
+            <input
+              type="text"
+              value={eventName}
+              onChange={(e) => setEventName(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label>Date:</label>
+            <input
+              type="date"
+              value={eventDate}
+              onChange={(e) => setEventDate(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label>Time:</label>
+            <input
+              type="time"
+              value={eventTime}
+              onChange={(e) => setEventTime(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label>Location:</label>
+            <input
+              type="text"
+              value={eventLocation}
+              onChange={(e) => setEventLocation(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label>Invitees (comma-separated emails):</label>
+            <input
+              type="text"
+              value={invitees}
+              onChange={(e) => setInvitees(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="create-event-button">Create Event</button>
+        </form>
+      </div>
     </div>
   );
 }
