@@ -9,3 +9,5 @@ app.include_router(meals.router)
 @app.get("/")
 def read_root():
     return {"message": "Welcome to the Potluck App"}
+
+
