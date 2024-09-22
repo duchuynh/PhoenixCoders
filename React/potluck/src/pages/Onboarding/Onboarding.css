@@ -1,41 +1,122 @@
+/* General Styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
 .onboarding-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    text-align: center;
-  }
-  
-  .onboarding-step {
-    margin-bottom: 20px;
-  }
-  
-  .checkbox-group, .radio-group {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 20px;
-  }
-  
-  .checkbox-label, .radio-label {
-    margin-bottom: 10px;
-  }
-  
-  .onboarding-button {
-    padding: 15px 50px; /* Similar padding to your example */
-    background-color: #f9c68c; /* The peach color */
-    color: white; /* White text */
-    font-size: 18px; /* Larger text size */
-    border: none;
-    border-radius: 40px; /* Fully rounded corners like the image */
-    cursor: pointer;
-    display: inline-block;
-    text-align: center;
-    transition: background-color 0.3s ease;
-    margin-top: 20px; /* Add some space above the button */
+  width: 400px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.8); /* Slight transparency to blend with the background */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.onboarding-step h3 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.checkbox-group, .radio-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+/* Hide the default checkbox and radio input */
+.checkbox-label input[type="checkbox"],
+.radio-label input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.custom-checkbox {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #f9c68c; /* Background of unchecked checkbox */
+  border-radius: 3px;
+  border: 2px solid #5D4037; /* Dark brown border */
+  margin-right: 10px;
+  position: relative;
+}
+
+/* Create a custom radio button */
+.custom-radio {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #f9c68c; /* Background of unchecked radio button */
+  border-radius: 50%;
+  border: 2px solid #5D4037; /* Dark brown border */
+  margin-right: 10px;
+  position: relative;
+}
+
+/* Show check mark inside custom checkbox when checked */
+.checkbox-label input[type="checkbox"]:checked + .custom-checkbox::after {
+  content: '✔';
+  color: #5D4037; /* Dark brown checkmark */
+  font-size: 18px;
+  position: absolute;
+  top: -2px;
+  left: 2px;
+}
+
+/* Show inner circle inside custom radio button when checked */
+.radio-label input[type="radio"]:checked + .custom-radio::after {
+  content: '';
+  display: block;
+  width: 10px;
+  height: 10px;
+  background-color: #5D4037; /* Dark brown dot for radio */
+  border-radius: 50%;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}
+
+/* Button Styles */
+.onboarding-button {
+  padding: 15px 50px; /* Similar padding to your example */
+  background-color: #f9c68c; /* The peach color */
+  color: white; /* White text */
+  font-size: 18px; /* Larger text size */
+  border: none;
+  border-radius: 40px; /* Fully rounded corners like the image */
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  margin-top: 20px; /* Add some space above the button */
 }
 
 .onboarding-button:hover {
-    background-color: #f39f5f; /* Slightly darker shade on hover */
+  background-color: #f39f5f; /* Slightly darker shade on hover */
+}
+
+/* Styling for labels */
+.checkbox-label, .radio-label {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.checkbox-label span, .radio-label span {
+  margin-left: 10px;
+  font-size: 16px;
+  color: #333;
 }
