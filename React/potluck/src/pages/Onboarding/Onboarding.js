@@ -80,7 +80,7 @@ function Onboarding() {
                   checked={selectedCuisines.includes(cuisine)}
                   onChange={() => handleCuisineChange(cuisine)}
                 />
-                {cuisine}
+                <span className="custom-checkbox"></span> {cuisine}
               </label>
             ))}
           </div>
@@ -98,7 +98,7 @@ function Onboarding() {
                   checked={selectedRestrictions.includes(restriction)}
                   onChange={() => handleRestrictionChange(restriction)}
                 />
-                {restriction}
+                <span className="custom-checkbox"></span> {restriction}
               </label>
             ))}
           </div>
@@ -117,7 +117,7 @@ function Onboarding() {
                   checked={skillLevel === level}
                   onChange={handleSkillChange}
                 />
-                {level} ({["Beginner", "Novice", "Intermediate", "Advanced", "Expert"][level - 1]})
+                <span className="custom-radio"></span> {level} ({["Beginner", "Novice", "Intermediate", "Advanced", "Expert"][level - 1]})
               </label>
             ))}
           </div>
