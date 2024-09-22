@@ -4,7 +4,6 @@ from flask_migrate import Migrate
 from models import db, User  # Import db and models
 
 app = Flask(__name__)
-CORS(app)
 
 # Configure SQLite for local database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///local.db'
@@ -13,6 +12,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # Initialize the database and Flask-Migrate
 db.init_app(app)
 migrate = Migrate(app, db)
+
+CORS(app)
 
 # Routes
 @app.route('/api/login', methods=['POST'])
