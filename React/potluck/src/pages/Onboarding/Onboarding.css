@@ -23,7 +23,19 @@
   }
   
   .onboarding-button {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 15px 50px; /* Similar padding to your example */
+    background-color: #f9c68c; /* The peach color */
+    color: white; /* White text */
+    font-size: 18px; /* Larger text size */
+    border: none;
+    border-radius: 40px; /* Fully rounded corners like the image */
     cursor: pointer;
-  }
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Add some space above the button */
+}
+
+.onboarding-button:hover {
+    background-color: #f39f5f; /* Slightly darker shade on hover */
+}
