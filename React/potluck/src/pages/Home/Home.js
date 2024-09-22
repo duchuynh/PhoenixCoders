@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../api'; // Your axios setup
+import './Home.css';
 
 function Home() {
   const [userData, setUserData] = useState(null);
